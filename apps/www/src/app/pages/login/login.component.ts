@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../api/account.service';
 import { finalize } from 'rxjs';
 
 @Component({

@@ -3,7 +3,7 @@
 </div>
 
 <div class="posts-container">
-  @for (post of posts$ | async; track post.id) {
+  @for (post of posts$ | async; track post._id) {
   <kr-post [post]="post"></kr-post>
   }
 </div>

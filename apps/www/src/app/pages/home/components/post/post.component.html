@@ -1,0 +1,32 @@
+<article class="post">
+  <div class="post-header">
+    <div class="user-info">
+      <img src="/assets/imgs/gojo-pfp.jpeg" alt="User Avatar" class="avatar" />
+      <div class="user-details">
+        <span class="username">User Name</span>
+        <span class="timestamp">{{ post().createdAt | date : 'medium' }}</span>
+      </div>
+    </div>
+  </div>
+
+  @if (post().mediaUrls && post().mediaUrls.length > 0) {
+  <div class="post-media">
+    @for (url of post().mediaUrls; track url) {
+    <div class="media-item">
+      @if (getFileType(url) === 'image') {
+      <img [src]="getMediaUrlFromServer(url)" [alt]="'Post media'" />
+      } @else {
+      <video controls>
+        <source [src]="getMediaUrlFromServer(url)" />
+        <p>Your browser does not support the video tag.</p>
+      </video>
+      }
+    </div>
+    }
+  </div>
+  }
+
+  <div class="post-content">
+    <p>{{ post().content }}</p>
+  </div>
+</article>

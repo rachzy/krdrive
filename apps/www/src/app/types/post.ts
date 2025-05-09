@@ -1,10 +1,19 @@
+export interface User {
+  _id: string;
+  username: string;
+}
+
 export type RawPost = {
   content: string;
   media: File[];
 };
 
-export type Post = RawPost & {
-  id: string;
-  createdAt: Date;
+export type Post = {
+  _id: string;
+  content: string;
+  mediaUrls: string[];
   userId: string;
+  user: User;
+  createdAt: string;
+  updatedAt: string;
 };

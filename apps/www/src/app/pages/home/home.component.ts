@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewPostComponent } from './components/new-post/new-post.component';
-import { FormBuilder } from '@angular/forms';
 import { RawPost } from '../../types/post';
-import { PostsService } from '../../services/posts.service';
-import { PostComponent } from '../../shared/components/post/post.component';
+import { PostsStoreService } from '../../services/posts-store.service';
+import { firstValueFrom } from 'rxjs';
+import { PostComponent } from './components/post/post.component';
 
 @Component({
   selector: 'kr-home',
@@ -14,13 +14,14 @@ import { PostComponent } from '../../shared/components/post/post.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  private readonly _postsService = inject(PostsService);
+  private readonly _postsService = inject(PostsStoreService);
 
   public readonly posts$ = this._postsService.posts$;
 
   public async handleSubmit(rawPost: RawPost): Promise<void> {
+    console.log(rawPost);
     try {
-      await this._postsService.addPost(rawPost);
+      await firstValueFrom(this._postsService.addPost(rawPost));
     } catch (error) {
       console.error(error);
     }

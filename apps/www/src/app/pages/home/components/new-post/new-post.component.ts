@@ -1,6 +1,11 @@
 import { Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FileUploadButtonComponent } from 'apps/www/src/app/shared/components/file-upload-button/file-upload-button.component';
 import { RawPost } from 'apps/www/src/app/types/post';
 
@@ -22,7 +27,7 @@ export class NewPostComponent {
   public readonly handleSubmit = output<RawPost>();
 
   public readonly form = this._fb.group({
-    content: this._fb.control<string>(''),
+    content: this._fb.control<string>('', [Validators.required]),
     media: this._fb.control<File[]>([]),
   });
 
