@@ -1,0 +1,12 @@
+<button [class]="buttonClass()" (click)="onButtonClick()" type="button">
+  {{ buttonText() }}
+</button>
+
+<input
+  #fileInput
+  type="file"
+  [accept]="accept()"
+  [multiple]="multiple()"
+  (change)="onFileSelected($event)"
+  style="display: none"
+/>

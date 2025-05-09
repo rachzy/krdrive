@@ -1,0 +1,9 @@
+<div class="home-container">
+  <kr-new-post (handleSubmit)="handleSubmit($event)"></kr-new-post>
+</div>
+
+<div class="posts-container">
+  @for (post of posts$ | async; track post.id) {
+  <kr-post [post]="post"></kr-post>
+  }
+</div>

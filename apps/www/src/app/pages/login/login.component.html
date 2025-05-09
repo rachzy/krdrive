@@ -1,0 +1,48 @@
+<div class="login-container">
+  <div class="login-box">
+    <h1>K.R. Drive</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+        <div
+          class="error-message"
+          *ngIf="username?.invalid && (username?.dirty || username?.touched)"
+        >
+          <span *ngIf="username?.errors?.['required']"
+            >Username is required</span
+          >
+          <span *ngIf="username?.errors?.['minlength']"
+            >Username must be at least 3 characters</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passkey">Passkey</label>
+        <input
+          type="password"
+          id="passkey"
+          formControlName="passkey"
+          placeholder="Enter your passkey"
+        />
+        <div
+          class="error-message"
+          *ngIf="passkey?.invalid && (passkey?.dirty || passkey?.touched)"
+        >
+          <span *ngIf="passkey?.errors?.['required']">Passkey is required</span>
+          <span *ngIf="passkey?.errors?.['minlength']"
+            >Passkey must be at least 6 characters</span
+          >
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>
