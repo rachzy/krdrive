@@ -24,25 +24,33 @@
       </div>
 
       <div class="form-group">
-        <label for="passkey">Passkey</label>
+        <label for="password">Password</label>
         <input
           type="password"
-          id="passkey"
-          formControlName="passkey"
-          placeholder="Enter your passkey"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
         />
         <div
           class="error-message"
-          *ngIf="passkey?.invalid && (passkey?.dirty || passkey?.touched)"
+          *ngIf="password?.invalid && (password?.dirty || password?.touched)"
         >
-          <span *ngIf="passkey?.errors?.['required']">Passkey is required</span>
-          <span *ngIf="passkey?.errors?.['minlength']"
-            >Passkey must be at least 6 characters</span
+          <span *ngIf="password?.errors?.['required']"
+            >Password is required</span
+          >
+          <span *ngIf="password?.errors?.['minlength']"
+            >Password must be at least 6 characters</span
           >
         </div>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid || isLoading">
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
     </form>
   </div>
 </div>
