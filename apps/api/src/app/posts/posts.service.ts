@@ -15,8 +15,8 @@ export class PostsService {
   ): Promise<Post> {
     const createdPost = new this.postModel({
       ...createPostDto,
-      userID,
       mediaUrls,
+      author: userID,
     });
     return createdPost.save();
   }
@@ -24,20 +24,21 @@ export class PostsService {
   public async findAll(): Promise<Post[]> {
     return this.postModel
       .find()
-      .populate('userID', 'username')
+      .populate('author', 'username')
       .sort({ createdAt: -1 })
       .exec();
   }
 
   public async findOne(id: string): Promise<Post> {
-    return this.postModel.findById(id).populate('userID', 'username').exec();
+    return this.postModel.findById(id).populate('author', 'username').exec();
   }
 
-  public async findByUser(userID: string): Promise<Post[]> {
+  public async findByAuthor(authorID: string): Promise<Post[]> {
     return this.postModel
-      .find({ userID })
-      .populate('userID', 'username')
+      .find({ author: authorID })
+      .populate('author', 'username')
       .sort({ createdAt: -1 })
+      .lean()
       .exec();
   }
 }

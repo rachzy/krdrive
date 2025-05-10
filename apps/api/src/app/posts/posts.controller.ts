@@ -52,8 +52,8 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
-  @Get('user/:userID')
-  public findByUser(@Param('userID') userID: string) {
-    return this.postsService.findByUser(userID);
+  @Get('author/:authorID')
+  public findByAuthor(@Param('authorID') authorID: string) {
+    return this.postsService.findByAuthor(authorID);
   }
 }
