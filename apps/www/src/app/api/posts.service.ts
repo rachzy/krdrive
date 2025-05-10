@@ -37,7 +37,7 @@ export class PostsService {
     return this._httpClient.get<Post>(`${API_URL}/posts/${id}`);
   }
 
-  public getUserPosts(userId: string): Observable<Post[]> {
-    return this._httpClient.get<Post[]>(`${API_URL}/posts/user/${userId}`);
+  public getUserPosts(userID: string): Observable<Post[]> {
+    return this._httpClient.get<Post[]>(`${API_URL}/posts/user/${userID}`);
   }
 }

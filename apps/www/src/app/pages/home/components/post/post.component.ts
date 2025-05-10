@@ -17,6 +17,7 @@ export class PostComponent {
   public readonly getFileType = getFileType;
 
   public getMediaUrlFromServer(url: string): string {
+    console.log(this.post());
     return `${environment.apiUrl}${url}`;
   }
 }

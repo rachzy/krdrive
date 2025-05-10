@@ -39,7 +39,7 @@ export class PostsController {
     files: Express.Multer.File[]
   ) {
     const mediaUrls = files?.map((file) => `/uploads/${file.filename}`) || [];
-    return this.postsService.create(createPostDto, user.userId, mediaUrls);
+    return this.postsService.create(createPostDto, user.userID, mediaUrls);
   }
 
   @Get()
@@ -52,8 +52,8 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
-  @Get('user/:userId')
-  public findByUser(@Param('userId') userId: string) {
-    return this.postsService.findByUser(userId);
+  @Get('user/:userID')
+  public findByUser(@Param('userID') userID: string) {
+    return this.postsService.findByUser(userID);
   }
 }

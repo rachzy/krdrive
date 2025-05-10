@@ -10,12 +10,12 @@ export class PostsService {
 
   public async create(
     createPostDto: CreatePostDto,
-    userId: string,
+    userID: string,
     mediaUrls: string[]
   ): Promise<Post> {
     const createdPost = new this.postModel({
       ...createPostDto,
-      userId,
+      userID,
       mediaUrls,
     });
     return createdPost.save();
@@ -24,19 +24,19 @@ export class PostsService {
   public async findAll(): Promise<Post[]> {
     return this.postModel
       .find()
-      .populate('userId', 'username')
+      .populate('userID', 'username')
       .sort({ createdAt: -1 })
       .exec();
   }
 
   public async findOne(id: string): Promise<Post> {
-    return this.postModel.findById(id).populate('userId', 'username').exec();
+    return this.postModel.findById(id).populate('userID', 'username').exec();
   }
 
-  public async findByUser(userId: string): Promise<Post[]> {
+  public async findByUser(userID: string): Promise<Post[]> {
     return this.postModel
-      .find({ userId })
-      .populate('userId', 'username')
+      .find({ userID })
+      .populate('userID', 'username')
       .sort({ createdAt: -1 })
       .exec();
   }

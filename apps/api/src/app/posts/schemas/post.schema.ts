@@ -11,7 +11,7 @@ export class Post extends Document {
   mediaUrls: string[];
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  userId: Types.ObjectId;
+  userID: Types.ObjectId;
 
   @Prop({ type: Types.ObjectId, ref: 'User' })
   user: User;

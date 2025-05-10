@@ -12,7 +12,6 @@ export type Post = {
   _id: string;
   content: string;
   mediaUrls: string[];
-  userId: string;
   user: User;
   createdAt: string;
   updatedAt: string;
