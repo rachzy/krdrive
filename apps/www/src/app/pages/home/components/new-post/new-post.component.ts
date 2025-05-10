@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FileUploadButtonComponent } from 'apps/www/src/app/shared/components/file-upload-button/file-upload-button.component';
-import { RawPost } from 'apps/www/src/app/types/post';
+import { FileUploadButtonComponent } from '../../../../shared/components/file-upload-button/file-upload-button.component';
+import { RawPost } from '../../../../types/post';
 
 @Component({
   selector: 'kr-new-post',

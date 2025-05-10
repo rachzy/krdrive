@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from 'apps/www/src/app/types/post';
-import { getFileType } from 'apps/www/src/app/util/files';
-import { environment } from 'apps/www/src/environments/environment';
+import { Post } from '../../../../types/post';
+import { getFileType } from '../../../../util/files';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'kr-post',

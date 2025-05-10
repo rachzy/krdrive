@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ElementRef,
-  ViewChild,
-  input,
-  output,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
