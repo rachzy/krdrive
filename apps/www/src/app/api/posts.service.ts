@@ -14,7 +14,7 @@ export interface CreatePostRequest {
   providedIn: 'root',
 })
 export class PostsService {
-  constructor(private http: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {}
 
   public createPost(request: CreatePostRequest): Observable<Post> {
     const formData = new FormData();
@@ -26,18 +26,18 @@ export class PostsService {
       });
     }
 
-    return this.http.post<Post>(`${API_URL}/posts`, formData);
+    return this._httpClient.post<Post>(`${API_URL}/posts`, formData);
   }
 
   public getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${API_URL}/posts`);
+    return this._httpClient.get<Post[]>(`${API_URL}/posts`);
   }
 
   public getPost(id: string): Observable<Post> {
-    return this.http.get<Post>(`${API_URL}/posts/${id}`);
+    return this._httpClient.get<Post>(`${API_URL}/posts/${id}`);
   }
 
   public getUserPosts(userId: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${API_URL}/posts/user/${userId}`);
+    return this._httpClient.get<Post[]>(`${API_URL}/posts/user/${userId}`);
   }
 }

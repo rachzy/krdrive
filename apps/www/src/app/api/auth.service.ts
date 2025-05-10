@@ -21,11 +21,11 @@ export interface RegisterRequest {
 @Injectable({
   providedIn: 'root',
 })
-export class AccountService {
-  constructor(private http: HttpClient) {}
+export class AuthService {
+  constructor(private _httpClient: HttpClient) {}
 
   public login(username: string, password: string): Observable<LoginResponse> {
-    return this.http
+    return this._httpClient
       .post<LoginResponse>(`${API_URL}/auth/login`, {
         username,
         password,
@@ -35,17 +35,5 @@ export class AccountService {
           localStorage.setItem('access_token', response.access_token);
         })
       );
-  }
-
-  public logout(): void {
-    localStorage.removeItem('access_token');
-  }
-
-  public getToken(): string | null {
-    return localStorage.getItem('access_token');
-  }
-
-  public isLoggedIn(): boolean {
-    return !!this.getToken();
   }
 }

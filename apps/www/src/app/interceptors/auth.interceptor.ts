@@ -1,17 +1,30 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { AccountService } from '../api/account.service';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { SessionService } from '../services/session.service';
+import { Observable } from 'rxjs';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const accountService = inject(AccountService);
-  const token = accountService.getToken();
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private _sessionService: SessionService) {}
 
-  if (token) {
-    const cloned = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`),
-    });
-    return next(cloned);
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = this._sessionService.getToken();
+
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`),
+      });
+      return next.handle(cloned);
+    }
+
+    return next.handle(req);
   }
-
-  return next(req);
-};
+}

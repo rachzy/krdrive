@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountService } from '../../api/account.service';
+import { AuthService } from '../../api/auth.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import { finalize } from 'rxjs';
 })
 export class LoginComponent {
   private readonly _fb = inject(FormBuilder);
-  private readonly _accountService = inject(AccountService);
+  private readonly _accountService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
 
