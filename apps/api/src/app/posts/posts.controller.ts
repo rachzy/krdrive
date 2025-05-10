@@ -25,7 +25,7 @@ export class PostsController {
 
   @Post()
   @UseInterceptors(FilesInterceptor('files', 10, storageConfig))
-  async create(
+  public async create(
     @Body() createPostDto: CreatePostDto,
     @GetUser() user: UserDto,
     @UploadedFiles(
@@ -36,24 +36,24 @@ export class PostsController {
         fileIsRequired: false,
       })
     )
-    files: any[]
+    files: Express.Multer.File[]
   ) {
     const mediaUrls = files?.map((file) => `/uploads/${file.filename}`) || [];
     return this.postsService.create(createPostDto, user.userId, mediaUrls);
   }
 
   @Get()
-  findAll() {
+  public findAll() {
     return this.postsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  public findOne(@Param('id') id: string) {
     return this.postsService.findOne(id);
   }
 
   @Get('user/:userId')
-  findByUser(@Param('userId') userId: string) {
+  public findByUser(@Param('userId') userId: string) {
     return this.postsService.findByUser(userId);
   }
 }

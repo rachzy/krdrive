@@ -3,16 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post } from './schemas/post.schema';
 import { CreatePostDto } from './dto/create-post.dto';
-import { User } from '../account/schemas/user.schema';
 
 @Injectable()
 export class PostsService {
-  constructor(
-    @InjectModel(Post.name) private postModel: Model<Post>,
-    @InjectModel(User.name) private userModel: Model<User>
-  ) {}
+  constructor(@InjectModel(Post.name) private postModel: Model<Post>) {}
 
-  async create(
+  public async create(
     createPostDto: CreatePostDto,
     userId: string,
     mediaUrls: string[]
@@ -25,7 +21,7 @@ export class PostsService {
     return createdPost.save();
   }
 
-  async findAll(): Promise<Post[]> {
+  public async findAll(): Promise<Post[]> {
     return this.postModel
       .find()
       .populate('userId', 'username')
@@ -33,11 +29,11 @@ export class PostsService {
       .exec();
   }
 
-  async findOne(id: string): Promise<Post> {
+  public async findOne(id: string): Promise<Post> {
     return this.postModel.findById(id).populate('userId', 'username').exec();
   }
 
-  async findByUser(userId: string): Promise<Post[]> {
+  public async findByUser(userId: string): Promise<Post[]> {
     return this.postModel
       .find({ userId })
       .populate('userId', 'username')

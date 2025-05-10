@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Post } from '../types/post';
+import { API_URL } from '../consts/api';
 
 export interface CreatePostRequest {
   content: string;
@@ -13,11 +14,9 @@ export interface CreatePostRequest {
   providedIn: 'root',
 })
 export class PostsService {
-  private readonly apiUrl = `${environment.apiUrl}/api`;
-
   constructor(private http: HttpClient) {}
 
-  createPost(request: CreatePostRequest): Observable<Post> {
+  public createPost(request: CreatePostRequest): Observable<Post> {
     const formData = new FormData();
     formData.append('content', request.content);
 
@@ -27,18 +26,18 @@ export class PostsService {
       });
     }
 
-    return this.http.post<Post>(`${this.apiUrl}/posts`, formData);
+    return this.http.post<Post>(`${API_URL}/posts`, formData);
   }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.apiUrl}/posts`);
+  public getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${API_URL}/posts`);
   }
 
-  getPost(id: string): Observable<Post> {
-    return this.http.get<Post>(`${this.apiUrl}/posts/${id}`);
+  public getPost(id: string): Observable<Post> {
+    return this.http.get<Post>(`${API_URL}/posts/${id}`);
   }
 
-  getUserPosts(userId: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.apiUrl}/posts/user/${userId}`);
+  public getUserPosts(userId: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`${API_URL}/posts/user/${userId}`);
   }
 }

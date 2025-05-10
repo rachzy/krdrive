@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { API_URL } from '../consts/api';
 
 export interface LoginResponse {
   access_token: string;
@@ -22,33 +22,30 @@ export interface RegisterRequest {
   providedIn: 'root',
 })
 export class AccountService {
-  private readonly apiUrl = `${environment.apiUrl}/api`;
-
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<LoginResponse> {
+  public login(username: string, password: string): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(`${this.apiUrl}/auth/login`, {
+      .post<LoginResponse>(`${API_URL}/auth/login`, {
         username,
         password,
       })
       .pipe(
         tap((response) => {
-          // Store the token in localStorage
           localStorage.setItem('access_token', response.access_token);
         })
       );
   }
 
-  logout(): void {
+  public logout(): void {
     localStorage.removeItem('access_token');
   }
 
-  getToken(): string | null {
+  public getToken(): string | null {
     return localStorage.getItem('access_token');
   }
 
-  isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     return !!this.getToken();
   }
 }
