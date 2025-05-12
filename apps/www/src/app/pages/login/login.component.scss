@@ -1,78 +1,31 @@
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+  @apply bg-[--color-background] flex justify-center items-center min-h-screen;
 }
 
 .login-box {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  @apply bg-[--color-background-secondary] p-8 rounded-lg shadow-md w-full w-[400px] max-w-[100%];
 
   h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
+    @apply text-center mb-8;
   }
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  @apply mb-6;
 
   label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #666;
+    @apply block mb-2;
   }
 
   input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-
-    &:focus {
-      outline: none;
-      border-color: #007bff;
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-    }
-
-    &:disabled {
-      background-color: #f5f5f5;
-      cursor: not-allowed;
-    }
+    @apply w-full;
   }
 }
 
 .error-message {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+  @apply text-red-600 text-sm mt-2;
 }
 
 button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+  @apply w-full text-white py-2 px-4 rounded-md;
 }

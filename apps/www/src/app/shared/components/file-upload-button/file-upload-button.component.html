@@ -1,5 +1,9 @@
 <button [class]="buttonClass()" (click)="onButtonClick()" type="button">
-  {{ buttonText() }}
+  @if (buttonText(); as text) {
+  {{ text }}
+  } @else {
+  <fa-icon [icon]="faPlus" />
+  }
 </button>
 
 <input

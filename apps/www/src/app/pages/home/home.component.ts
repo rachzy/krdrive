@@ -19,7 +19,6 @@ export class HomeComponent {
   public readonly posts$ = this._postsService.posts$;
 
   public async handleSubmit(rawPost: RawPost): Promise<void> {
-    console.log(rawPost);
     try {
       await firstValueFrom(this._postsService.addPost(rawPost));
     } catch (error) {

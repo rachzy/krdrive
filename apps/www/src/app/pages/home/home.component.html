@@ -1,8 +1,13 @@
+<h1>
+  <span class="text-primary">K</span>.<span class="text-secondary">R</span>.
+  Drive
+</h1>
+
 <div class="home-container">
   <kr-new-post (handleSubmit)="handleSubmit($event)"></kr-new-post>
 </div>
 
-<div class="posts-container">
+<div class="posts container">
   @for (post of posts$ | async; track post._id) {
   <kr-post [post]="post"></kr-post>
   }

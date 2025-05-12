@@ -1,0 +1,89 @@
+@use 'sass:meta';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@include meta.load-css('variables.scss');
+@include meta.load-css('reset.scss');
+
+/* Webkit scrollbar styles */
+::-webkit-scrollbar {
+  @apply w-10;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-full;
+  @apply hover:bg-gray-500;
+}
+
+/* Firefox scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #433bff #282b30;
+}
+
+body {
+  @apply min-h-[100vh];
+  @apply bg-[--color-background];
+  @apply text-[--color-text] font-firacode;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+h1 {
+  @apply font-codystar text-6xl font-bold;
+}
+
+input {
+  @apply px-3 py-3 border border-gray-300 rounded-md;
+  @apply bg-[--color-background-secondary] text-gray-200;
+  @apply focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/25;
+  @apply disabled:bg-gray-100 disabled:cursor-not-allowed;
+}
+
+button {
+  @apply p-3 border-none rounded-md;
+  @apply text-white;
+  @apply cursor-pointer;
+  @apply transition-colors duration-200;
+
+  &.primary {
+    @apply bg-primary;
+  }
+
+  &.secondary {
+    @apply bg-secondary;
+    @apply text-black;
+  }
+
+  &.tertiary {
+    @apply bg-accent;
+  }
+
+  &.danger {
+    @apply bg-danger;
+  }
+
+  &.warning {
+    @apply bg-warning;
+  }
+
+  &.success {
+    @apply bg-success;
+  }
+
+  &:disabled {
+    @apply bg-gray-400;
+    @apply cursor-not-allowed;
+  }
+}

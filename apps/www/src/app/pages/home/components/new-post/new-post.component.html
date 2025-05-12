@@ -1,22 +1,40 @@
 <div class="container">
-  <div class="profile-picture">
-    <img src="/assets/imgs/gojo-pfp.jpeg" alt="Profile Picture" />
+  <div class="row">
+    <div class="profile-picture">
+      <img src="/assets/imgs/gojo-pfp.jpeg" alt="Profile Picture" />
+    </div>
+
+    <div class="input-container">
+      <input
+        type="text"
+        [formControl]="controls.content"
+        placeholder="Type something silly..."
+      />
+
+      <kr-file-upload-button
+        [accept]="'image/*, video/*'"
+        [multiple]="true"
+        (filesSelected)="handleFileUpload($event)"
+      ></kr-file-upload-button>
+    </div>
+
+    <button class="submit-button secondary" (click)="onSubmit()">Submit</button>
   </div>
-
-  <div class="input-container">
-    <input
-      type="text"
-      [formControl]="controls.content"
-      placeholder="What's on your mind?"
-    />
+  <div class="row">
+    <div class="files">
+      @let files = files$ | async; @if (files && files.length > 0) {
+      <p class="files-title">Attachments</p>
+      <div class="files-container">
+        @for (file of files; track file) {
+        <div class="file-item">
+          <p>{{ file.name }}</p>
+          <button (click)="deleteFile(file.name)">
+            <fa-icon [icon]="faTimes" />
+          </button>
+        </div>
+        }
+      </div>
+      }
+    </div>
   </div>
-
-  <kr-file-upload-button
-    [accept]="'image/*, video/*'"
-    [multiple]="true"
-    (filesSelected)="handleFileUpload($event)"
-    buttonText="+"
-  ></kr-file-upload-button>
-
-  <button (click)="onSubmit()">Submit</button>
 </div>

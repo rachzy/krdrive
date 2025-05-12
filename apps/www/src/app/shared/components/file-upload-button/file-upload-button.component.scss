@@ -1,24 +1,26 @@
 button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  @apply px-4 py-2;
+  @apply bg-[--color-accent] text-white text-xl;
+  @apply cursor-pointer;
+  @apply transition-colors duration-200;
+  @apply rounded-[50%];
 
   &:hover {
-    background-color: #0056b3;
+    @apply bg-[--color-accent];
   }
 
   &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    @apply outline-none;
+    @apply ring-2 ring-blue-500/25;
   }
 
   &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    @apply bg-gray-400 cursor-not-allowed;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    @apply rounded-none;
   }
 }
