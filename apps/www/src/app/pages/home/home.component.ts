@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewPostComponent } from './components/new-post/new-post.component';
-import { RawPost } from '../../types/post';
+import { Post, RawPost } from '../../types/post';
 import { PostsStoreService } from '../../services/posts-store.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { PostComponent } from './components/post/post.component';
 
 @Component({
@@ -15,8 +15,16 @@ import { PostComponent } from './components/post/post.component';
 })
 export class HomeComponent {
   private readonly _postsService = inject(PostsStoreService);
-
   public readonly posts$ = this._postsService.posts$;
+  public readonly postsByColumns = this.posts$.pipe(
+    map((posts: Post[]) => {
+      const columns = Array.from({ length: 4 }, () => [] as Post[]);
+      posts.forEach((post, index) => {
+        columns[index % 4].push(post);
+      });
+      return columns;
+    })
+  );
 
   public async handleSubmit(rawPost: RawPost): Promise<void> {
     try {

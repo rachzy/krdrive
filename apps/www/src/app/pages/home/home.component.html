@@ -8,7 +8,11 @@
 </div>
 
 <div class="posts container">
-  @for (post of posts$ | async; track post._id) {
-  <kr-post [post]="post"></kr-post>
+  @for (column of postsByColumns | async; track column) {
+  <div class="column">
+    @for (post of column; track post._id) {
+    <kr-post [post]="post"></kr-post>
+    }
+  </div>
   }
 </div>

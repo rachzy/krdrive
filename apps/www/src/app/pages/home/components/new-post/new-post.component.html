@@ -23,7 +23,7 @@
   <div class="row">
     <div class="files">
       @let files = files$ | async; @if (files && files.length > 0) {
-      <p class="files-title">Attachments</p>
+      <p class="files-title mt-4">Attachments</p>
       <div class="files-container">
         @for (file of files; track file) {
         <div class="file-item">
