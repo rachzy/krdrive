@@ -3,12 +3,14 @@ import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Post, RawPost } from '../types/post';
 import { PostsService } from '../api/posts.service';
 import { SessionService } from './session.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsStoreService {
   private readonly _sessionService = inject(SessionService);
+  private readonly _toastService = inject(ToastService);
 
   public readonly user$ = this._sessionService.user$;
 
@@ -53,8 +55,12 @@ export class PostsStoreService {
       this._posts.next(
         this._posts.getValue().filter((post) => post._id !== postId)
       );
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      this._toastService.show({
+        message: 'Failed to delete post',
+        description: error?.message ?? 'Unknown error',
+        type: 'danger',
+      });
     }
   }
 

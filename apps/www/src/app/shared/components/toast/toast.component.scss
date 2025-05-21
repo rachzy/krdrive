@@ -1,0 +1,39 @@
+.toast-container {
+  @apply fixed bottom-4 right-4 z-50 flex flex-col gap-2;
+}
+
+.toast {
+  @apply bg-[--color-background-secondary];
+  @apply flex items-center justify-between gap-4;
+  @apply rounded-lg px-4 py-3 text-white shadow-lg transition-all duration-300 ease-in-out;
+  @apply border border-solid;
+  @apply max-w-[100%] w-[500px];
+
+  .toast-close {
+    @apply text-inherit text-lg;
+  }
+
+  p {
+    @apply text-sm text-gray-300;
+  }
+
+  &--danger {
+    @apply text-danger border-danger;
+  }
+
+  &--success {
+    @apply text-success border-success;
+  }
+
+  &--warning {
+    @apply text-warning border-warning;
+  }
+
+  &--info {
+    @apply text-info border-info;
+  }
+
+  &:hover {
+    @apply opacity-90;
+  }
+}

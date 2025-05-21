@@ -1,0 +1,18 @@
+<div class="toast-container">
+  @for (toast of toastService.toasts$ | async; track toast) {
+  <div
+    class="toast"
+    [class]="getToastTypeClass(toast.type)"
+    tabindex="0"
+    role="alert"
+  >
+    <div class="toast-content">
+      <h3>{{ toast.message }}</h3>
+      <p>{{ toast.description }}</p>
+    </div>
+    <button class="toast-close" (click)="closeToast(toast.message)">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+  }
+</div>

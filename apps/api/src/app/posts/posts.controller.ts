@@ -72,7 +72,6 @@ export class PostsController {
       user.userID,
       new Types.ObjectId(id)
     );
-    console.log(post);
 
     if (!post) {
       throw new NotFoundException('Post not found');
