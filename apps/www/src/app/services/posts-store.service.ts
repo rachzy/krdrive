@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, firstValueFrom, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Post, RawPost } from '../types/post';
 import { PostsService } from '../api/posts.service';
 import { SessionService } from './session.service';
@@ -47,11 +47,15 @@ export class PostsStoreService {
     this._posts.next([populatedPost, ...this._posts.getValue()]);
   }
 
-  public removePost(postId: string): void {
-    // TODO: Implement delete endpoint in backend
-    this._posts.next(
-      this._posts.getValue().filter((post) => post._id !== postId)
-    );
+  public async deletePost(postId: string): Promise<void> {
+    try {
+      await firstValueFrom(this.postsService.deletePost(postId));
+      this._posts.next(
+        this._posts.getValue().filter((post) => post._id !== postId)
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public refreshPosts(): void {

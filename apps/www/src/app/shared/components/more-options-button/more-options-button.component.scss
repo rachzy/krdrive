@@ -1,0 +1,51 @@
+.more-options {
+  @apply relative inline-block;
+
+  .menu {
+    @apply absolute right-0;
+    @apply z-50;
+    @apply mt-2 w-48;
+    @apply origin-top-right;
+    @apply rounded-md;
+    @apply bg-[--color-background-secondary];
+    @apply p-2;
+    @apply shadow-lg;
+    @apply ring-1 ring-black ring-opacity-5;
+    @apply focus:outline-none;
+  }
+
+  .item {
+    @apply flex w-full;
+    @apply items-center gap-2;
+    @apply px-4 py-2;
+    @apply text-sm text-white;
+    @apply hover:bg-gray-100;
+    @apply focus:outline-none;
+
+    &--danger {
+      @apply text-danger;
+      @apply hover:bg-danger hover:text-white;
+    }
+  }
+
+  &__icon {
+    @apply h-4 w-4;
+  }
+}
+
+button {
+  @apply px-4 py-2;
+  @apply text-white text-xl;
+  @apply cursor-pointer;
+  @apply transition-colors duration-200;
+
+  &:disabled {
+    @apply bg-gray-400 cursor-not-allowed;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    @apply rounded-none;
+  }
+}

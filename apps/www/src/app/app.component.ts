@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SessionService } from './services/session.service';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, ModalComponent],
   selector: 'kr-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

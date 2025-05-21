@@ -1,0 +1,48 @@
+@if (modalService.isOpen$ | async) {
+<div
+  class="modal__backdrop"
+  (click)="onBackdropClick($event)"
+  (keydown.escape)="onBackdropClick($event)"
+  (keydown.enter)="onBackdropClick($event)"
+  tabindex="0"
+  role="dialog"
+  aria-modal="true"
+>
+  <div
+    class="modal__container"
+    [class]="getModalTypeClass()"
+    (click)="$event.stopPropagation()"
+    (keydown.enter)="$event.stopPropagation()"
+    tabindex="0"
+  >
+    <h2 class="modal__title">
+      {{ (modalService.config$ | async)?.title }}
+    </h2>
+    <p class="modal__message">
+      {{ (modalService.config$ | async)?.message }}
+    </p>
+
+    <div class="modal__actions">
+      @if ((modalService.config$ | async)?.secondaryButton) {
+      <button
+        class="modal__button modal__button--secondary"
+        [class]="getButtonClass()"
+        (click)="onSecondaryClick()"
+        (keydown.enter)="onSecondaryClick()"
+      >
+        {{ (modalService.config$ | async)?.secondaryButton?.label }}
+      </button>
+      } @if ((modalService.config$ | async)?.primaryButton) {
+      <button
+        class="modal__button modal__button--primary"
+        [class]="getButtonClass()"
+        (click)="onPrimaryClick()"
+        (keydown.enter)="onPrimaryClick()"
+      >
+        {{ (modalService.config$ | async)?.primaryButton?.label }}
+      </button>
+      }
+    </div>
+  </div>
+</div>
+}

@@ -11,7 +11,12 @@
         <span class="username">{{ author.username }}</span>
         <span class="timestamp">{{ post().createdAt | date : 'medium' }}</span>
       </div>
-      }
+      } @if (user$ | async; as user) { @if (user._id === post().author._id) {
+      <kr-more-options-button
+        class="ml-auto"
+        [items]="getPostMoreOptions(post()._id)"
+      ></kr-more-options-button>
+      } }
     </div>
   </div>
 

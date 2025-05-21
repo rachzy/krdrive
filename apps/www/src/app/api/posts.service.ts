@@ -28,6 +28,10 @@ export class PostsService {
     return this._httpClient.post<Post>(`${API_URL}/posts`, formData);
   }
 
+  public deletePost(postID: string): Observable<void> {
+    return this._httpClient.delete<void>(`${API_URL}/posts/${postID}`);
+  }
+
   public getPosts(): Observable<Post[]> {
     return this._httpClient.get<Post[]>(`${API_URL}/posts`);
   }

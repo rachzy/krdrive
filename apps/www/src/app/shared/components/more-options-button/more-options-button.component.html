@@ -1,0 +1,33 @@
+<div
+  class="more-options"
+  (click)="$event.stopPropagation()"
+  (keydown.enter)="$event.stopPropagation()"
+  tabindex="0"
+>
+  <button
+    class="ellipsis"
+    (click)="toggleMenu($event)"
+    (keydown.enter)="toggleMenu($event)"
+    aria-label="More options"
+  >
+    <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+  </button>
+
+  @if (isOpen) {
+  <div class="menu">
+    @for (item of items; track item.label) {
+    <button
+      class="item"
+      [class.item--danger]="item.type === 'danger'"
+      (click)="onItemClick(item, $event)"
+      (keydown.enter)="onItemClick(item, $event)"
+    >
+      @if (item.icon) {
+      <fa-icon [icon]="item.icon"></fa-icon>
+      }
+      {{ item.label }}
+    </button>
+    }
+  </div>
+  }
+</div>

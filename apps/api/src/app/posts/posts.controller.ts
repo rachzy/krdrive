@@ -9,6 +9,10 @@ import {
   UploadedFiles,
   ParseFilePipe,
   MaxFileSizeValidator,
+  Delete,
+  ForbiddenException,
+  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -17,6 +21,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { UserDto } from '../account/dto/user.dto';
 import { storageConfig } from '../../config/storage.config';
+import { isValidObjectId, Types } from 'mongoose';
 
 @Controller('posts')
 @UseGuards(JwtAuthGuard)
@@ -55,5 +60,24 @@ export class PostsController {
   @Get('author/:authorID')
   public findByAuthor(@Param('authorID') authorID: string) {
     return this.postsService.findByAuthor(authorID);
+  }
+
+  @Delete(':id')
+  public async delete(@Param('id') id: string, @GetUser() user: UserDto) {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException('Invalid post ID');
+    }
+
+    const post = await this.postsService.findOneFromAuthor(
+      user.userID,
+      new Types.ObjectId(id)
+    );
+    console.log(post);
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return this.postsService.delete(id);
   }
 }

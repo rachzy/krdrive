@@ -1,0 +1,78 @@
+:host {
+  display: contents;
+}
+
+.modal {
+  &__backdrop {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50;
+  }
+
+  &__container {
+    @apply w-full max-w-md rounded-lg bg-[--color-background-secondary] p-6 shadow-xl;
+  }
+
+  &__title {
+    @apply mb-4 text-xl font-semibold;
+  }
+
+  &__message {
+    @apply mb-6 text-gray-300;
+  }
+
+  &__actions {
+    @apply flex justify-end gap-4;
+  }
+
+  &__button {
+    @apply flex-1;
+    &--secondary {
+      @apply rounded px-4 py-2 text-gray-600 hover:bg-gray-100;
+    }
+
+    &--primary {
+      @apply rounded px-4 py-2 text-white;
+    }
+  }
+
+  &__button {
+    &--primary {
+      &.modal--danger {
+        @apply bg-danger hover:bg-opacity-90;
+      }
+
+      &.modal--success {
+        @apply bg-success hover:bg-opacity-90;
+      }
+
+      &.modal--warning {
+        @apply bg-warning hover:bg-opacity-90;
+      }
+
+      &.modal--info {
+        @apply bg-info hover:bg-opacity-90;
+      }
+
+      &.modal--primary {
+        @apply bg-primary hover:bg-opacity-90;
+      }
+    }
+
+    &--secondary {
+      &.modal--danger {
+        @apply text-danger border border-solid border-danger hover:bg-danger hover:bg-opacity-10 hover:text-white;
+      }
+
+      &.modal--success {
+        @apply text-success border border-solid border-success hover:bg-success hover:bg-opacity-10 hover:text-white;
+      }
+
+      &.modal--warning {
+        @apply text-warning border border-solid border-warning hover:bg-warning hover:bg-opacity-10 hover:text-white;
+      }
+
+      &.modal--info {
+        @apply text-info border border-solid border-info hover:bg-info hover:bg-opacity-10 hover:text-white;
+      }
+    }
+  }
+}
