@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { Post, RawPost } from '../../types/post';
 import { PostsStoreService } from '../../services/posts-store.service';
-import { firstValueFrom, map } from 'rxjs';
+import { map } from 'rxjs';
 import { PostComponent } from './components/post/post.component';
 
 @Component({
@@ -28,7 +28,7 @@ export class HomeComponent {
 
   public async handleSubmit(rawPost: RawPost): Promise<void> {
     try {
-      await firstValueFrom(this._postsService.addPost(rawPost));
+      await this._postsService.addPost(rawPost);
     } catch (error) {
       console.error(error);
     }

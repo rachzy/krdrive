@@ -33,6 +33,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           localStorage.setItem('access_token', response.access_token);
+          localStorage.setItem('user_id', response.user._id);
         })
       );
   }

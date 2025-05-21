@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, firstValueFrom, Observable, take, tap } from 'rxjs';
 import { Post, RawPost } from '../types/post';
 import { PostsService } from '../api/posts.service';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsStoreService {
+  private readonly _sessionService = inject(SessionService);
+
+  public readonly user$ = this._sessionService.user$;
+
   private readonly _posts = new BehaviorSubject<Post[]>([]);
   public readonly posts$ = this._posts.asObservable();
 
@@ -24,17 +29,22 @@ export class PostsStoreService {
     return this._posts.getValue();
   }
 
-  public addPost(rawPost: RawPost): Observable<Post> {
-    return this.postsService
-      .createPost({
+  public async addPost(rawPost: RawPost): Promise<void> {
+    const user = await firstValueFrom(this.user$);
+    if (!user) return;
+
+    const newPost = await firstValueFrom(
+      this.postsService.createPost({
         content: rawPost.content,
         files: rawPost.media,
       })
-      .pipe(
-        tap((newPost) => {
-          this._posts.next([newPost, ...this._posts.getValue()]);
-        })
-      );
+    );
+
+    const populatedPost: Post = {
+      ...newPost,
+      author: user,
+    };
+    this._posts.next([populatedPost, ...this._posts.getValue()]);
   }
 
   public removePost(postId: string): void {

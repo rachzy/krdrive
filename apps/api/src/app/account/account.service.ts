@@ -11,7 +11,7 @@ export class AccountService {
     @InjectModel(User.name) private readonly userModel: Model<User>
   ) {}
 
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
+  public async createUser(createUserDto: CreateUserDto): Promise<User> {
     const { username, password } = createUserDto;
 
     // Check if user already exists
@@ -33,7 +33,11 @@ export class AccountService {
     return newUser.save();
   }
 
-  async findByUsername(username: string): Promise<User | null> {
+  public async findByID(id: string): Promise<User | null> {
+    return this.userModel.findById(id, { password: 0 }).exec();
+  }
+
+  public async findByUsername(username: string): Promise<User | null> {
     return this.userModel.findOne({ username }).exec();
   }
 }
