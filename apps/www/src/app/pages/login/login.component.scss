@@ -1,24 +1,33 @@
+:host {
+  @apply flex justify-between;
+  @apply w-full;
+}
+
+.image-container {
+  @apply self-end;
+}
+
 .login-container {
   @apply bg-[--color-background] flex justify-center items-center min-h-screen;
-}
 
-.login-box {
-  @apply bg-[--color-background-secondary] p-8 rounded-lg shadow-md w-full w-[400px] max-w-[100%];
+  .login-box {
+    @apply bg-[--color-background-secondary] p-8 rounded-lg shadow-md w-full w-[400px] max-w-[100%];
 
-  h1 {
-    @apply text-center mb-8;
-  }
-}
-
-.form-group {
-  @apply mb-6;
-
-  label {
-    @apply block mb-2;
+    h1 {
+      @apply text-center mb-8;
+    }
   }
 
-  input {
-    @apply w-full;
+  .form-group {
+    @apply mb-6;
+
+    label {
+      @apply block mb-2;
+    }
+
+    input {
+      @apply w-full;
+    }
   }
 }
 
@@ -28,4 +37,20 @@
 
 button {
   @apply w-full text-white py-2 px-4 rounded-md;
+}
+
+@media screen and (max-width: 768px) {
+  .image-container {
+    @apply hidden;
+  }
+
+  .login-container {
+    @apply w-full;
+    @apply items-center justify-center;
+
+    .login-box {
+      @apply w-full h-full;
+      @apply flex flex-col justify-center;
+    }
+  }
 }
