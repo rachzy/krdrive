@@ -32,7 +32,7 @@ export class NewPostComponent {
   public readonly handleSubmit = output<RawPost>();
 
   public readonly form = this._fb.group({
-    content: this._fb.control<string>('', [Validators.required]),
+    content: this._fb.control<string>(''),
     media: this._fb.control<File[]>([]),
   });
 
@@ -51,12 +51,12 @@ export class NewPostComponent {
   }
 
   public onSubmit() {
-    if (!this.form.valid) {
-      this.form.markAllAsTouched();
+    const formValue = this.form.getRawValue();
+
+    if (!formValue.content && !formValue.media?.length) {
       return;
     }
 
-    const formValue = this.form.getRawValue();
     const rawPost: RawPost = {
       content: formValue.content || '',
       media: formValue.media || [],

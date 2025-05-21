@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post } from './schemas/post.schema';
@@ -18,6 +18,11 @@ export class PostsService {
       mediaUrls,
       author: userID,
     });
+
+    if (!createdPost.content && !createdPost.mediaUrls.length) {
+      throw new BadRequestException('Post must have content or media');
+    }
+
     return createdPost.save();
   }
 
