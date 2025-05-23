@@ -20,6 +20,11 @@
           {
             "glob": "**/*",
             "input": "apps/www/public"
+          },
+          {
+            "glob": "web.config",
+            "input": "apps/www",
+            "output": "."
           }
         ],
         "styles": ["apps/www/src/styles/global.scss"],

@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Param,
-  Get,
-  NotFoundException,
-} from '@nestjs/common';
+import { Controller, Param, Get, NotFoundException } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { User } from './schemas/user.schema';
 
