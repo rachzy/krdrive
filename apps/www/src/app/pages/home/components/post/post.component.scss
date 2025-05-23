@@ -39,23 +39,104 @@
 }
 
 .post-media {
-  @apply grid gap-2;
-  @apply grid-cols-[repeat(auto-fit,minmax(100px,1fr))];
+  @apply relative;
+  @apply w-full;
+  @apply my-4;
 
-  .media-item {
-    @apply overflow-hidden rounded;
-    @apply w-full h-full overflow-hidden relative;
+  .carousel-container {
+    @apply relative;
+    @apply w-full;
+    @apply rounded-lg;
+    @apply overflow-hidden;
 
-    img {
-      @apply w-full h-full object-cover rounded-2xl;
+    .media-item {
+      @apply w-full;
+      @apply flex;
+      @apply items-center justify-center;
+      @apply transition-transform duration-500 ease-in-out;
+      @apply transform;
+
+      &.slide-left {
+        @apply -translate-x-full;
+      }
+
+      &.slide-right {
+        @apply translate-x-full;
+      }
+
+      img,
+      video {
+        @apply w-full h-full;
+        @apply object-cover;
+        @apply transition-opacity duration-200;
+      }
     }
 
-    .file-preview {
-      @apply w-full h-full flex items-center justify-center;
-      @apply bg-gray-100 border border-dashed border-gray-300;
+    .carousel-controls {
+      @apply absolute;
+      @apply top-1/2 left-0 right-0;
+      @apply -translate-y-1/2;
+      @apply flex justify-between;
+      @apply px-4;
+      @apply pointer-events-none;
 
-      .file-name {
-        @apply text-gray-600 text-sm text-center p-2;
+      .nav-button {
+        @apply w-10 h-10;
+        @apply rounded-full;
+        @apply bg-white/90;
+        @apply border-none;
+        @apply flex items-center justify-center;
+        @apply cursor-pointer;
+        @apply pointer-events-auto;
+        @apply transition-all duration-200;
+        @apply text-gray-700;
+
+        &:hover:not(:disabled) {
+          @apply bg-white;
+          @apply scale-110;
+        }
+
+        &:disabled {
+          @apply opacity-50;
+          @apply cursor-not-allowed;
+        }
+
+        fa-icon {
+          @apply text-lg;
+        }
+      }
+    }
+
+    .carousel-indicators {
+      @apply absolute;
+      @apply bottom-4 left-1/2;
+      @apply -translate-x-1/2;
+      @apply flex gap-2;
+      @apply pointer-events-none;
+
+      button {
+        @apply p-0;
+      }
+
+      .indicator {
+        @apply block;
+        @apply w-2 h-2;
+        @apply rounded-full;
+        @apply bg-white/50;
+        @apply border-none;
+        @apply cursor-pointer;
+        @apply pointer-events-auto;
+        @apply transition-all duration-200;
+        @apply p-0;
+
+        &:hover {
+          @apply bg-white/80;
+        }
+
+        &.active {
+          @apply bg-white;
+          @apply scale-125;
+        }
       }
     }
   }

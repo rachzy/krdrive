@@ -8,15 +8,19 @@ import {
   MoreOptionsButtonComponent,
   MoreOptionsItem,
 } from '../../../../shared/components/more-options-button/more-options-button.component';
-import { firstValueFrom } from 'rxjs';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from '../../../../services/modal.service';
 import { PostsStoreService } from '../../../../services/posts-store.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'kr-post',
   standalone: true,
-  imports: [CommonModule, MoreOptionsButtonComponent],
+  imports: [CommonModule, MoreOptionsButtonComponent, FontAwesomeModule],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
@@ -27,11 +31,38 @@ export class PostComponent {
 
   public readonly user$ = this._sessionService.user$;
   public readonly post = input.required<Post>();
+  public currentIndex = 0;
+  public animationDirection: 'left' | 'right' | null = null;
 
   public readonly getFileType = getFileType;
+  public readonly faChevronLeft = faChevronLeft;
+  public readonly faChevronRight = faChevronRight;
 
   public getMediaUrlFromServer(url: string): string {
     return `${environment.apiUrl}${url}`;
+  }
+
+  public nextMedia(): void {
+    if (
+      this.post().mediaUrls &&
+      this.currentIndex < this.post().mediaUrls.length - 1
+    ) {
+      this.animationDirection = 'left';
+      setTimeout(() => {
+        this.currentIndex++;
+        this.animationDirection = null;
+      }, 200);
+    }
+  }
+
+  public previousMedia(): void {
+    if (this.currentIndex > 0) {
+      this.animationDirection = 'right';
+      setTimeout(() => {
+        this.currentIndex--;
+        this.animationDirection = null;
+      }, 200);
+    }
   }
 
   public handleDeletePost(postID: string): void {

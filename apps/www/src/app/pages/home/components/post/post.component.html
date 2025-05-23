@@ -22,18 +22,53 @@
 
   @if (post().mediaUrls && post().mediaUrls.length > 0) {
   <div class="post-media">
-    @for (url of post().mediaUrls; track url) {
-    <div class="media-item">
-      @if (getFileType(url) === 'image') {
-      <img [src]="getMediaUrlFromServer(url)" [alt]="'Post media'" />
-      } @else {
-      <video controls>
-        <source [src]="getMediaUrlFromServer(url)" />
-        <p>Your browser does not support the video tag.</p>
-      </video>
+    <div class="carousel-container">
+      <div
+        class="media-item"
+        [class.slide-left]="animationDirection === 'left'"
+        [class.slide-right]="animationDirection === 'right'"
+      >
+        @if (getFileType(post().mediaUrls[currentIndex]) === 'image') {
+        <img
+          [src]="getMediaUrlFromServer(post().mediaUrls[currentIndex])"
+          [alt]="'Post media'"
+        />
+        } @else {
+        <video controls>
+          <source
+            [src]="getMediaUrlFromServer(post().mediaUrls[currentIndex])"
+          />
+          <p>Your browser does not support the video tag.</p>
+        </video>
+        }
+      </div>
+
+      @if (post().mediaUrls.length > 1) {
+      <div class="carousel-controls">
+        <button
+          class="nav-button prev"
+          (click)="previousMedia()"
+          [disabled]="currentIndex === 0"
+        >
+          <fa-icon [icon]="faChevronLeft"></fa-icon>
+        </button>
+        <button
+          class="nav-button next"
+          (click)="nextMedia()"
+          [disabled]="currentIndex === post().mediaUrls.length - 1"
+        >
+          <fa-icon [icon]="faChevronRight"></fa-icon>
+        </button>
+      </div>
+      <div class="carousel-indicators">
+        @for (url of post().mediaUrls; track url; let i = $index) {
+        <button (click)="currentIndex = i">
+          <span class="indicator" [class.active]="i === currentIndex"></span>
+        </button>
+        }
+      </div>
       }
     </div>
-    }
   </div>
   }
 
