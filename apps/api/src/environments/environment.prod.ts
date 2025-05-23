@@ -3,4 +3,5 @@ export const environment = {
   mongodb: {
     uri: process.env.MONGODB_URI || '',
   },
+  origin: process.env.ORIGIN || '',
 };

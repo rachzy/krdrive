@@ -23,7 +23,13 @@
           }
         ],
         "styles": ["apps/www/src/styles/global.scss"],
-        "scripts": []
+        "scripts": [],
+        "fileReplacements": [
+          {
+            "replace": "apps/www/src/environments/environment.ts",
+            "with": "apps/www/src/environments/environment.prod.ts"
+          }
+        ]
       },
       "configurations": {
         "production": {
@@ -44,7 +50,8 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": []
         }
       },
       "defaultConfiguration": "production"
