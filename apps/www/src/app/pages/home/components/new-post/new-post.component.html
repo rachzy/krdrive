@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="profile-picture">
-      <img src="/assets/images/gojo-pfp.jpeg" alt="Profile Picture" />
+      @if (user$ | async; as user) {
+      <img
+        [src]="getProfilePictureByUsername(user.username)"
+        alt="Profile Picture"
+      />
+      }
     </div>
 
     <div class="input-container">

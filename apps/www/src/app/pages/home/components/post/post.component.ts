@@ -16,6 +16,7 @@ import {
 import { ModalService } from '../../../../services/modal.service';
 import { PostsStoreService } from '../../../../services/posts-store.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { getProfilePictureByUsername } from '../../../../util/users';
 
 @Component({
   selector: 'kr-post',
@@ -37,6 +38,8 @@ export class PostComponent {
   public readonly getFileType = getFileType;
   public readonly faChevronLeft = faChevronLeft;
   public readonly faChevronRight = faChevronRight;
+
+  public readonly getProfilePictureByUsername = getProfilePictureByUsername;
 
   public getMediaUrlFromServer(url: string): string {
     return `${environment.apiUrl}${url}`;

@@ -11,8 +11,9 @@ import { RawPost } from '../../../../types/post';
 import { getFileType } from '../../../../util/files';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { getProfilePictureByUsername } from '../../../../util/users';
+import { SessionService } from 'apps/www/src/app/services/session.service';
 
-const MAX_FILE_NAME_LENGTH = 15;
 @Component({
   selector: 'kr-new-post',
   standalone: true,
@@ -28,6 +29,9 @@ const MAX_FILE_NAME_LENGTH = 15;
 })
 export class NewPostComponent {
   private readonly _fb = inject(FormBuilder);
+  private readonly _sessionService = inject(SessionService);
+
+  public readonly user$ = this._sessionService.user$;
 
   public readonly handleSubmit = output<RawPost>();
 
@@ -42,6 +46,8 @@ export class NewPostComponent {
   public readonly controls = this.form.controls;
 
   public readonly faTimes = faTimes;
+
+  public readonly getProfilePictureByUsername = getProfilePictureByUsername;
 
   public handleFileUpload(files: FileList) {
     this.controls.media.setValue([

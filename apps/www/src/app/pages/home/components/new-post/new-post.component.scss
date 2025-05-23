@@ -15,7 +15,7 @@
   @apply flex-shrink-0;
 
   img {
-    @apply w-12 h-12 rounded-full object-cover border-2 border-gray-200;
+    @apply w-16 h-16 rounded-full object-cover border-[1px] border-gray-100;
   }
 }
 

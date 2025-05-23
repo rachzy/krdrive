@@ -1,6 +1,8 @@
+import { Username } from './users';
+
 export interface User {
   _id: string;
-  username: string;
+  username: Username;
 }
 
 export type RawPost = {
