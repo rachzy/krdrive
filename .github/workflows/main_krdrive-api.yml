@@ -56,7 +56,9 @@ jobs:
           name: api-artifact
 
       - name: Unzip API package
-        run: unzip dist/release-api.zip -d dist/apps/api
+        run: |
+          mkdir -p dist/apps/api
+          unzip release-api.zip -d dist/apps/api
 
       - name: Login to Azure
         uses: azure/login@v2
