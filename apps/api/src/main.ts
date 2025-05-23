@@ -16,9 +16,15 @@ async function bootstrap() {
   });
 
   // Serve static files from uploads directory in project root
-  app.useStaticAssets(join(__dirname, '..', '..', '..', 'uploads'), {
-    prefix: '/uploads',
-  });
+  if(environment.production) {
+    app.useStaticAssets(join(__dirname, 'uploads'), {
+      prefix: '/uploads',
+    });
+  } else {
+    app.useStaticAssets(join(__dirname, '..', '..', '..', 'uploads'), {
+      prefix: '/uploads',
+    });
+  }
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
