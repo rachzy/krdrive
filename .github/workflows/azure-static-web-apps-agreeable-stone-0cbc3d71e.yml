@@ -53,9 +53,9 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AGREEABLE_STONE_0CBC3D71E }}
           action: upload
-          app_location: "./dist/apps/www"                   # root (we already built)
+          app_location: "./dist/apps/www/browser"                   # root (we already built)
           api_location: ""                    # no Azure Functions here
-          output_location: "./dist/apps/www"    # where nx put index.html, etc.
+          output_location: "./dist/apps/www/browser"    # where nx put index.html, etc.
           skip_app_build: true                # ⬅️ tell SWA not to run Oryx
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
