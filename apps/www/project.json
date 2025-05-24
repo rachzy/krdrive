@@ -25,6 +25,11 @@
             "glob": "web.config",
             "input": "apps/www",
             "output": "."
+          },
+          {
+            "glob": "staticwebapp.config.json",
+            "input": "apps/www",
+            "output": "."
           }
         ],
         "styles": ["apps/www/src/styles/global.scss"],
