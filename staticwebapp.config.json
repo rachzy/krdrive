@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "route": "/home",
+      "methods": [
+        "get",
+        "connect",
+        "head"
+      ],
+      "redirect": "/index.html",
+      "statusCode": 301
+    }
+  ]
+}
