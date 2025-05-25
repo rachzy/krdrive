@@ -9,14 +9,14 @@ async function bootstrap() {
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-
   app.enableCors({
     origin: environment.origin,
     credentials: true,
   });
 
   // Serve static files from uploads directory in project root
-  if(environment.production) {
+  // (For legacy files)
+  if (environment.production) {
     app.useStaticAssets(join(__dirname, 'uploads'), {
       prefix: '/uploads',
     });

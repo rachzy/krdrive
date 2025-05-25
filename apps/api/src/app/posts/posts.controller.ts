@@ -20,13 +20,18 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { UserDto } from '../account/dto/user.dto';
-import { storageConfig } from '../../config/storage.config';
+import { AzureStorageService } from '../services/azure-storage.service';
 import { isValidObjectId, Types } from 'mongoose';
+import { environment } from '../../environments/environment';
+import { storageConfig } from '../../config/storage.config';
 
 @Controller('posts')
 @UseGuards(JwtAuthGuard)
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(
+    private readonly postsService: PostsService,
+    private readonly azureStorage: AzureStorageService
+  ) {}
 
   @Post()
   @UseInterceptors(FilesInterceptor('files', 10, storageConfig))
@@ -41,9 +46,21 @@ export class PostsController {
         fileIsRequired: false,
       })
     )
-    files: Express.Multer.File[]
+    files: any[]
   ) {
-    const mediaUrls = files?.map((file) => `/uploads/${file.filename}`) || [];
+    const mediaUrls = [];
+
+    if (environment.production) {
+      const uploadedFilesURLs = await Promise.all(
+        (files || []).map((file) => this.azureStorage.uploadFile(file))
+      );
+      mediaUrls.push(...uploadedFilesURLs);
+    } else {
+      mediaUrls.push(
+        ...(files?.map((file) => `/uploads/${file.filename}`) || [])
+      );
+    }
+
     return this.postsService.create(createPostDto, user.userID, mediaUrls);
   }
 
