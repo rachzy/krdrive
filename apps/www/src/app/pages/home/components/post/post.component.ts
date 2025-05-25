@@ -42,10 +42,6 @@ export class PostComponent {
   public readonly getProfilePictureByUsername = getProfilePictureByUsername;
 
   public getMediaUrlFromServer(url: string): string {
-    if (url.startsWith('https://')) {
-      return url;
-    }
-
     return `${environment.apiUrl}${url}`;
   }
 

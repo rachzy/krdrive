@@ -8,7 +8,6 @@ import { AuthModule } from './auth/auth.module';
 import { PostsModule } from './posts/posts.module';
 import configuration from '../config/configuration';
 import { environment } from '../environments/environment';
-import { AzureStorageService } from './services/azure-storage.service';
 
 @Module({
   imports: [
@@ -22,6 +21,6 @@ import { AzureStorageService } from './services/azure-storage.service';
     PostsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AzureStorageService],
+  providers: [AppService],
 })
 export class AppModule {}

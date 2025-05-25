@@ -4,7 +4,6 @@ import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
 import { Post, PostSchema } from './schemas/post.schema';
 import { User, UserSchema } from '../account/schemas/user.schema';
-import { AzureStorageService } from '../services/azure-storage.service';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { AzureStorageService } from '../services/azure-storage.service';
     ]),
   ],
   controllers: [PostsController],
-  providers: [PostsService, AzureStorageService],
+  providers: [PostsService],
   exports: [PostsService],
 })
 export class PostsModule {}
